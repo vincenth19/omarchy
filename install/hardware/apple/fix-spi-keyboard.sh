@@ -1,5 +1,9 @@
 # Detect MacBook models that need SPI keyboard modules
-product_name="$(cat /sys/class/dmi/id/product_name 2>/dev/null)"
+# Machines without DMI -- the Raspberry Pi among them -- have no
+# /sys/class/dmi at all. cat then exits non-zero, and because run_logged
+# executes these scripts under `bash -eE`, the failed assignment aborts the
+# whole step before the MacBook test is even reached.
+product_name="$(cat /sys/class/dmi/id/product_name 2>/dev/null || true)"
 if [[ $product_name =~ MacBook[89],1|MacBook1[02],1|MacBookPro13,[123]|MacBookPro14,[123] ]]; then
   echo "Detected MacBook with SPI keyboard"
 

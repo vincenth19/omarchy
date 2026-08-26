@@ -1,3 +1,11 @@
+# omarchy-pi: the Pi port does not install snapper -- it boots from the Pi's
+# own firmware off a FAT partition, with no btrfs root to snapshot. Without
+# this guard the step dies with exit 127 on every install.
+if ! command -v snapper >/dev/null 2>&1; then
+  echo "Snapper is not installed; skipping snapshot configuration"
+  exit 0
+fi
+
 SNAPPER_CONFIG_PATH="${OMARCHY_SNAPPER_CONFIG_PATH:-/etc/snapper/configs/root}"
 SNAPPER_CONF_PATH="${OMARCHY_SNAPPER_CONF_PATH:-/etc/conf.d/snapper}"
 template="${OMARCHY_SNAPPER_TEMPLATE:-${OMARCHY_PATH:-/usr/share/omarchy}/default/snapper/root}"
