@@ -3,7 +3,6 @@
 
 aether
 alsa-utils
-asdcontrol
 avahi
 bash-completion
 bat
@@ -24,7 +23,6 @@ docker
 docker-buildx
 docker-compose
 dosfstools
-dotnet-runtime
 dua-cli
 evince
 exfatprogs
@@ -89,15 +87,12 @@ noto-fonts-cjk
 noto-fonts-emoji
 nss-mdns
 nvim
-obs-studio
-obsidian
 omacalc
 omacut
 omawrite
 omarchy-nvim
 pacman-contrib
 pamixer
-pinta
 plocate
 plymouth
 postgresql-libs
@@ -105,7 +100,6 @@ power-profiles-daemon
 python-gobject
 python-poetry-core
 ttfx
-qemu-user-static-binfmt
 qrencode
 qt6-imageformats
 quickshell
@@ -148,3 +142,16 @@ yay
 yt-dlp
 zbar
 zoxide
+
+# --- omarchy-pi (aarch64) ---
+# Removed for the Raspberry Pi port. Everything above installs on aarch64;
+# these do not, and none of them are load-bearing for the desktop:
+#
+#   asdcontrol               Apple Studio Display brightness over USB (x86-only, no Pi use case)
+#   qemu-user-static-binfmt  x86 cross-architecture emulation (pointless on an ARM host)
+#   dotnet-runtime           no aarch64 package in Arch Linux ARM
+#   pinta                    needs dotnet-runtime
+#   obs-studio               no aarch64 package; build from the AUR if wanted
+#   obsidian                 proprietary Electron app, no aarch64 build published
+#
+# `nvim` is kept: Arch Linux ARM's `neovim` provides it.
